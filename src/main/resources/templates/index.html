@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="<http://www.thymeleaf.org>">
+<head>
+    <title>Home</title>
+</head>
+<body>
+<header>
+    <div th:if="${#request.userPrincipal == null}">
+        <a href="/register">Register</a>
+        <a href="/login">Login</a>
+    </div>
+    <div th:if="${#request.userPrincipal != null}">
+        <span th:text="${#request.userPrincipal.name}"></span>
+        <a href="/logout">Logout</a>
+    </div>
+</header>
+
+<div th:if="${#request.userPrincipal != null}">
+    <form th:action="@{/search}" method="get">
+        <input type="text" name="query" placeholder="Search files and folders"/>
+        <button type="submit">Search</button>
+    </form>
+
+    <nav>
+        <ul>
+            <li><a th:href="@{/?path=}" th:class="${path == '' ? 'active' : ''}">Root</a></li>
+            <li th:each="folder : ${#strings.arrayList(path.split('/'))}">
+                <a th:href="@{|/?path=${folder}|}" th:text="${folder}"></a>
+            </li>
+        </ul>
+    </nav>
+
+    <ul>
+        <li th:each="file : ${files}">
+            <span th:text="${file.name}"></span>
+            <button th:onclick="'showActions(' + ${file.id} + ')'">Actions</button>
+            <!-- Меню действий -->
+        </li>
+    </ul>
+
+    <form th:action="@{/upload}" method="post" enctype="multipart/form-data">
+        <input type="file" name="file"/>
+        <button type="submit">Upload</button>
+    </form>
+</div>
+</body>
+</html>
