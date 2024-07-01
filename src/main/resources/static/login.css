@@ -1,0 +1,8 @@
+body {
+    display: flex;
+    justify-content: center; /* Центрируем по горизонтали */
+    align-items: center; /* Центрируем по вертикали */
+    height: 100vh; /* Высота равная высоте видимой области */
+    margin: 0; /* Убираем внешние отступы */
+    background-color: #f0f0f0; /* Цвет фона */
+}
