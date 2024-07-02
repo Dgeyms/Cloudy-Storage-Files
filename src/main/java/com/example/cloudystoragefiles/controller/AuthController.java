@@ -1,7 +1,8 @@
 package com.example.cloudystoragefiles.controller;
 
 import com.example.cloudystoragefiles.model.User;
-import com.example.cloudystoragefiles.service.UserServiceImpl;
+import com.example.cloudystoragefiles.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -9,9 +10,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class AuthController {
 
-    private UserServiceImpl userService;
+    private final UserService userService;
 
-    public AuthController(UserServiceImpl userService) {
+    @Autowired
+    public AuthController(UserService userService) {
         this.userService = userService;
     }
 
@@ -28,7 +30,7 @@ public class AuthController {
     @PostMapping("/registerUser")
     public String registerUser(User user){
         userService.saveUserInDatabase(user);
-        return "ok";
+        return "redirect:/login?success";
     }
 
 
