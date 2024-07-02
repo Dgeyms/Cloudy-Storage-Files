@@ -1,22 +1,17 @@
 package com.example.cloudystoragefiles.model;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotEmpty;
-import org.springframework.lang.NonNull;
 
 @Entity
 @Table(name = "user")
-public class UserDTO {
+public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NonNull
-    @NotEmpty
+    @Column(name = "login")
     private String login;
-
-    @NonNull
-    @NotEmpty
+    @Column(name = "password")
     private String password;
 
     public Long getId() {
