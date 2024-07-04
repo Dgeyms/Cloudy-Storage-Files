@@ -3,7 +3,7 @@ package com.example.cloudystoragefiles.dto;
 import jakarta.validation.constraints.NotEmpty;
 import org.springframework.lang.NonNull;
 
-public class UserDTO {
+public class UserDto {
 
     @NonNull
     @NotEmpty
